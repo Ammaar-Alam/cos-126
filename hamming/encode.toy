@@ -1,0 +1,45 @@
+/******************************************************************************
+ *  Description:  Encodes a sequence of 4 bits using Hamming code,
+ *                outputting 7 bits for each 4-bit chunk. Stops upon reading FFFF.
+ *  Input:        Sequence of four 4-bit integers, followed by FFFF
+ *  Output:       Encoded 7-bit sequences, each as a separate 4-bit integer,
+                  followed by FFFF
+ ******************************************************************************/
+
+; Read first value to determine if it's the end of the file
+10: 8AFF   read R[A]                      ; Read first bit into R[A]
+11: 7101   R[1] <- 0001                   ; Load constant 1 into R[1]
+12: 1BA1   R[B] <- R[A] + R[1]            ; Add 1 to R[A], result in R[B]
+13: CB25   if (R[B] == 0) goto 25         ; If result is 0 (i.e., R[A] was FFFF),
+                                          ; jump to output FFFF
+
+; Reads rest of set of 4 bits
+14: 8BFF   read R[B]                      ; Read second bit into R[B]
+15: 8CFF   read R[C]                      ; Read third bit into R[C]
+16: 8DFF   read R[D]                      ; Read fourth bit into R[D]
+
+; Calculates parity bits
+17: 4EAB   R[E] <- R[A] ^ R[B]            ; XOR R[A] and R[B], store in R[E]
+18: 4EED   R[E] <- R[E] ^ R[D]            ; XOR R[E] (current) and R[D], update R[E]
+
+19: 4FAC   R[F] <- R[A] ^ R[C]            ; XOR R[A] and R[C], store in R[F]
+1A: 4FFD   R[F] <- R[F] ^ R[D]            ; XOR R[F] (current) and R[D], update R[F]
+
+1B: 49BC   R[9] <- R[B] ^ R[C]            ; XOR R[B] and R[C], store in R[9]
+1C: 499D   R[9] <- R[9] ^ R[D]            ; XOR R[9] (current) and R[D], update R[9]
+
+; Writes original 4 bits and 3 parity bits to StdOut
+1D: 9AFF   write R[A]                     ; Output R[A]
+1E: 9BFF   write R[B]                     ; Output R[B]
+1F: 9CFF   write R[C]                     ; Output R[C]
+20: 9DFF   write R[D]                     ; Output R[D]
+21: 9EFF   write R[E]                     ; Output R[E] (p1)
+22: 9FFF   write R[F]                     ; Output R[F] (p2)
+23: 99FF   write R[9]                     ; Output R[9] (p3)
+
+; Repeat reading data into StdIn
+24: C010   goto 10                        ; Jump back to read next set of inputs
+
+; Output FFFF and halt
+25: 9AFF   write R[A]                     ; Output R[A] (FFFF)
+26: 0000   halt                           ; Halt the program

@@ -1,0 +1,65 @@
+/******************************************************************************
+ *  Description:  Decodes a sequence of 7 bits (including 3 parity bits) using
+ *                Hamming code, correcting a single-bit error in the first 4 bits.
+ *  Input:        Sequence of seven 1-bit values, ending with FFFF
+ *  Output:       Corrected 4-bit sequences, followed by FFFF
+ ******************************************************************************/
+
+; Read first value to determine if it's the end of the file
+10: 81FF   read R[1]                      ; Read first bit into R[1]
+11: 7801   R[8] <- 0001                   ; Load constant 1 into R[8]
+12: 1918   R[9] <- R[1] + R[8]            ; Add 1 to R[1], result in R[9]
+13: C935   if (R[9] == 0) goto 35         ; If result is 0 (i.e., R[1] was FFFF), halt
+
+; Reads rest of set of 7 bits
+14: 82FF   read R[2]                      ; Read second bit into R[2]
+15: 83FF   read R[3]                      ; Read third bit into R[3]
+16: 84FF   read R[4]                      ; Read fourth bit into R[4]
+17: 85FF   read R[5]                      ; Read fifth bit into R[5]
+18: 86FF   read R[6]                      ; Read sixth bit into R[6]
+19: 87FF   read R[7]                      ; Read seventh bit into R[7]
+
+; Calculates parity bits
+1A: 4A12   R[A] <- R[1] ^ R[2]            ; XOR R[1] and R[2], store in R[A]
+1B: 4AA4   R[A] <- R[A] ^ R[4]            ; XOR R[A] (current) and R[4], update R[A]
+1C: 4B13   R[B] <- R[1] ^ R[3]            ; XOR R[1] and R[3], store in R[B]
+1D: 4BB4   R[B] <- R[B] ^ R[4]            ; XOR R[B] (current) and R[4], update R[B]
+1E: 4C23   R[C] <- R[2] ^ R[3]            ; XOR R[2] and R[3], store in R[C]
+1F: 4CC4   R[C] <- R[C] ^ R[4]            ; XOR R[C] (current) and R[4], update R[C]
+
+; Compares calculated parity bits with given parity bits
+20: 4DA5   R[D] <- R[A] ^ R[5]            ; XOR R[A] and R[5], store in R[D]
+21: 4EB6   R[E] <- R[B] ^ R[6]            ; XOR R[B] and R[6], store in R[E]
+22: 4FC7   R[F] <- R[C] ^ R[7]            ; XOR R[C] and R[7], store in R[F]
+
+; Corrects the bit if needed
+23: CD28   if (R[D] == 0) goto 28         ; If R[D] is 0, go to 28
+24: CE2C   if (R[E] == 0) goto 2C         ; If R[E] is 0, go to 2C
+25: CF2F   if (R[F] == 0) goto 2F         ; If R[F] is 0, go to 2F
+26: 4448   R[4] <- R[4] ^ R[8]            ; Correct R[4]
+27: C030   goto 30                        ; Go to 30
+
+; Corrects the bit if needed
+28: CE30   if (R[E] == 0) goto 30         ; If R[E] is 0, go to 30
+29: CF30   if (R[F] == 0) goto 30         ; If R[F] is 0, go to 30
+2A: 4338   R[3] <- R[3] ^ R[8]            ; Correct R[3]
+2B: C030   goto 30                        ; Go to 30
+
+; Corrects the bit if needed
+2C: CF30   if (R[F] == 0) goto 30         ; If R[F] is 0, go to 30
+2D: 4228   R[2] <- R[2] ^ R[8]            ; Correct R[2]
+2E: C030   goto 30                        ; Go to 30
+
+; Corrects the bit if needed
+2F: 4118   R[1] <- R[1] ^ R[8]            ; Correct R[1]
+
+; Writes first four bits to StdOut
+30: 91FF   write R[1]                     ; Output R[1]
+31: 92FF   write R[2]                     ; Output R[2]
+32: 93FF   write R[3]                     ; Output R[3]
+33: 94FF   write R[4]                     ; Output R[4]
+
+; Repeat reading data from StdIn
+34: C010   goto 10                        ; Jump back to read next set of inputs
+
+35: 0000   halt                           ; Halt program
