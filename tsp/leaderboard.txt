@@ -1,0 +1,31 @@
+/**********************************************************************
+ *  Fill in the lengths computed by your heuristics.                  *
+ **********************************************************************/
+
+data file      nearest neighbor     smallest increase      leaderboard
+-----------------------------------------------------------------------
+tsp10.txt         1566.1363             1655.7462          1552.9612
+tsp100.txt        7389.9297             4887.2190          4703.6697
+tsp1000.txt       27868.7106            17265.6282         16245.4901
+usa13509.txt      77449.9794            45074.7769         42891.4295
+
+
+/**********************************************************************
+ *  If you did the leaderboard, explain your heuristic, and how
+ *  you went about implementing it.
+ **********************************************************************/
+my heuristic combines the greedy approach with an enhanced 2-opt optimization.
+initially, a tour is generated using a greedy algorithm that always extends the
+tour by choosing the nearest unvisited point. this method ensures a quick construction
+of a complete tour but doesn't guarantee the shortest possible path (aint no way i can
+find that, already killed my sanity on this alone. i went insane trying to make it
+shorter while still running usa13509 within 60 seconds). the enhanced 2-opt
+optimization is then applied iteratively to further improve the tour length.
+(i think? i wrote this damn thing and idek how it works fully lmfao)
+
+
+
+
+
+
+

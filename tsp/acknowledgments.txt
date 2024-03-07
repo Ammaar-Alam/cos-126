@@ -1,0 +1,58 @@
+Programming Assignment 8:  Traveling Salesperson Problem
+
+
+/******************************************************************************
+ *  Describe whatever help, if any, that you received on this assignment.
+ *     - Include help from people, including course staff, lab TAs,
+ *       classmates, and friends. Attribute them by name and include the
+ *       date(s) on which they helped you.
+ *     - Do not include course materials (such as the course textbook,
+ *       lecture videos, and class meetings).
+ *     - Write "none" if you did not receive any help.
+ *  Here is an example:
+ *
+ *      9/16/22 Grace Hopper     (faculty)
+ *      9/16/22 John von Neumann (lab TA)
+ ******************************************************************************/
+
+[write the dates and help received here]
+11/18/23 https://medium.com/opex-analytics/heuristic-algorithms-for-the-traveling-salesman-problem-6a53d8143584
+11/18/23 http://160592857366.free.fr/joe/ebooks/ShareData/Heuristics%20for%20the%20Traveling%20Salesman%20Problem%20By%20Christian%20Nillson.pdf
+11/18/23 https://www.baeldung.com/cs/tsp-exact-solutions-vs-heuristic-vs-approximation-algorithms
+
+
+/******************************************************************************
+ *  Write and sign the following student acknowledgment of original work.
+ *  For your signature, type /s/, followed by your name.
+ *  Each partner must do this. Here is an example:
+ *
+ *      This programming assignment represents my own work in accordance
+ *      with University regulations.  /s/ Ada Lovelace
+ *
+ *      This programming assignment represents my own work in accordance
+ *      with University regulations.  /s/ Alan Turing
+ ******************************************************************************/
+
+[write and sign the pledge here]
+This programming assignment represents my own work in accordance
+with University regulations.  /s/ Ammaar Alam
+
+
+/******************************************************************************
+ *  Each partner must indicate below that they followed the COS 126
+ *  partnership rules.
+ *
+ *  For your signature, type /s/, followed by your name (as above).
+ *
+ *  Write "NA" if you did not work with a partner.
+ *
+ ******************************************************************************/
+
+My partner and I read, understood and adhered to the COS 126 programming
+assignment partnership rules.  We were together at all times when code
+(including required .txt files) was being written.
+
+[Each partner sign here, or write NA if you did not partner]
+no friends, they left me :(
+
+
