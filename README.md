@@ -70,6 +70,45 @@ The assignments in this course covered a wide range of introductory programming 
       <div align="center">Audio synthesis, user input handling, real-time processing</div>
     </td>
   </tr>
+  <tr>
+    <td>
+      <div align="center">
+        <a href="/sierpinski">Sierpinski Triangle</a>
+      </div>
+    </td>
+    <td>
+      <div align="center">Generation of the Sierpinski triangle fractal</div>
+    </td>
+    <td>
+      <div align="center">Recursion, geometric algorithms, graphics programming</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div align="center">
+        <a href="/nbody">N-Body Simulation</a>
+      </div>
+    </td>
+    <td>
+      <div align="center">Simulation of gravitational interactions between celestial bodies</div>
+    </td>
+    <td>
+      <div align="center">Physics simulations, numerical integration, vector mathematics</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div align="center">
+        <a href="/tsp">Traveling Salesperson Problem</a>
+      </div>
+    </td>
+    <td>
+      <div align="center">Implementation of algorithms to solve the TSP</div>
+    </td>
+    <td>
+      <div align="center">Graph algorithms, optimization problems, heuristics</div>
+    </td>
+  </tr>
 </table>
 
 ### Acknowledgements
